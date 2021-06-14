@@ -7,6 +7,9 @@ package com.resttechsoutions.mensajesapp.beans;
 
 import java.sql.Date;
 
+
+
+
 /**
  *
  * @author Rafael Estrella
@@ -15,7 +18,7 @@ public class Mensaje {
     private int idMsj;
     private String msj;
     private String autor;
-    private Date fecha;
+    private Date fecha= new java.sql.Date(new java.util.Date().getTime());
 
     public Mensaje() {
     }
@@ -68,9 +71,9 @@ public class Mensaje {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
+//    public void setFecha(Date fecha) {
+//        this.fecha = fecha;
+//    }
     
     
 }

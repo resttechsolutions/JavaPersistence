@@ -5,62 +5,33 @@
  */
 package com.resttechsoutions.mensajesapp.source;
 
-import com.resttechsoutions.mensajesapp.services.MensajeService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 /**
  *
  * @author Rafael Estrella
  */
 public class MySqlConnection {
+    private Connection con;
+    private final String URL;
+    private final String USER;
+    private final String PASS;
+
+    public MySqlConnection() {
+        this.URL = "jdbc:mysql://localhost:3306/mensajes_app";
+        this.USER = "root";
+        this.PASS = "10rafael10";
+    }
     
-    public Connection getConnection(){
-        Connection con = null;
-        Scanner sc = new Scanner(System.in);
-        
-        int opcion = 0;
-        
-        do{
-            System.out.println("--------------");
-            System.out.println("Msj App");
-            System.out.println(" 1. Create Msj");
-            System.out.println(" 2. Read Mesj");
-            System.out.println(" 3. Edit Mesj");
-            System.out.println(" 4. Delete Mesj");
-            System.out.println(" 5. Quit");
-            
-            opcion = sc.nextInt();
-            
-            switch(opcion){
-                case 1:
-                    MensajeService.createMsj();
-                    break;
-                case 2:
-                    MensajeService.readMsj();
-                    break;
-                case 3:
-                    MensajeService.updateMsj();
-                    break;
-                case 4:
-                    MensajeService.deleteMsj();
-                    break;
-                default:
-                    break;
-                    
-            }
-        } while(opcion != 5);
-        
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mensajes_app","root","10rafael10");
-            
-            
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+    public Connection getConnection() throws SQLException{
+        con = DriverManager.getConnection(URL,USER, PASS);
         
         return con;
+    }
+    
+    public void closeConnection() throws SQLException{
+        con.close();
     }
 }
